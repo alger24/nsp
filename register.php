@@ -17,7 +17,13 @@ require 'php/dry.php';
 
 <main>
     <div class="registerBox">
-        input
+        <form action="<?php __DIR__.'php/handler.php'?>" method="post"></form>
+
+        <a href="php/handler.php" target="_blank" rel="noopener noreferrer">UWU</a>
+        
+        <button type="submit" name="signupBtn" class="signupBtn" id="signupBtn">
+            Register
+        </button>
     </div>
 </main>
 

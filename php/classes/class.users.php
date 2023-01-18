@@ -4,8 +4,8 @@ class Users extends Conndb
     /* 
         Properties 
     */
-    public string $user_uid;
-    public string $user_uid2;
+    protected string $user_uid;
+    protected string $extr_uid;
     protected $sql;
     protected $conn;
 
@@ -17,17 +17,48 @@ class Users extends Conndb
         $this->conn = $db->getConnection();
     }
 
+    /*
+        Destruct
+    */
     public function __destruct() {
         $this->sql = null;
+        $this->conn = null;
     }
 
-    
+
+    /* 
+        Getter & Setter
+    */
+
+    protected function getUID() {
+        return $user_uid = $this->user_uid;
+    }
+
+    protected function setUID($setuser_uid) {
+        $this->user_uid = $setuser_uid;
+    }
+
+
     /* 
         Main Methods 
     */
 
+
+    protected function sInsert($tblname, $data) {
+        try {
+            $this->conn->beginTransaction();
+            
+
+
+
+        } catch(PDOException $e) {
+            $this->conn->rollBack();
+            echo "Fatal Error: " . $e->getMessage();
+        }
+    }
+
     // Create
-    protected function postCrud($tblname, $data, $options) {
+    protected function multiInsert($tblname, array $data) {
         try {
             $this->conn->beginTransaction();
 
@@ -49,10 +80,6 @@ class Users extends Conndb
                 $sql = "INSERT INTO $tblname (";
                 $sql .= implode(", ", $fields) . ") VALUES (";
                 $sql .= implode(", ", $values) . ")";
-
-                /* It's a ternary operator. It's a shorthand if statement. It's saying if  is
-                true, then append  to , otherwise do nothing. */
-                $options ? $sql .= $options : null;
 
                 $stmt = $this->conn->prepare($sql);
 

@@ -1,5 +1,8 @@
 <?php
 
+/* 
+*   @index.php header & footer template 
+*/
 function __headerindex($title) {
 return <<<HTML
 <!DOCTYPE html>
@@ -23,5 +26,4 @@ return <<<HTML
 </html>
 HTML;
 }
-
 ?>

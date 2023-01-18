@@ -8,7 +8,7 @@ class Conndb
     private $dbhost = "localhost"; // Ip Address of database if external connection.
     private $dbuser = "root"; // Username for DB
     private $dbpass = ""; // Password for DB
-    private $dbname = "pds_db"; // DB Name
+    private $dbname = "nsp_db"; // DB Name
 
     /*
         Get an instance of the Database
