@@ -6,24 +6,26 @@ require 'php/dry.php';
 <!-- BODY START -->
 
 <header>
-    <nav>
-        <img src="#" alt="neust logo" class="logo">
-        <div class="boxLinks">
-            <a href="php/admin.php">Admin</a>
-            <a href="php/staff.php">Staff</a>
-        </div>
-    </nav>
+
+    <?= __headernav() ?>
+
 </header>
 
 <main>
     <div class="registerBox">
-        <form action="<?php __DIR__.'php/handler.php'?>" method="post"></form>
+        <form action="#" method="get" autocomplete="off">
 
-        <a href="php/handler.php" target="_blank" rel="noopener noreferrer">UWU</a>
-        
-        <button type="submit" name="signupBtn" class="signupBtn" id="signupBtn">
-            Register
-        </button>
+            <input type="text" name="user_fname" placeholder="First Name" id="user_fname" class="user_fname">
+            <input type="text" name="user_mname" placeholder="Middle Name" id="user_mname" class="user_mname">
+            <input type="text" name="user_lname" placeholder="Last Name" id="user_lname" class="user_lname">
+            <input type="date" name="user_bdate" id="user_bdate" class="user_bdate">
+            <input type="email" name="user_email" placeholder="Email" id="user_email" class="user_email">
+            <input type="password" name="user_password" placeholder="Password" id="user_password" class="user_password">
+
+            <button type="submit" name="signupBtn" class="signupBtn" id="signupBtn">
+                Register
+            </button>
+        </form>
     </div>
 </main>
 
