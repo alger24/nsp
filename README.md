@@ -8,14 +8,9 @@ Hello! "underconstruction"
 
 
 ## To-do List
-[![label](https://img.shields.io/badge/Registration-in--progress-orange)](#)
-<details open>
-    <summary>Files under registration</summary>
-    <ul>
-    <li><a href="https://github.com/alger24/nsp/blob/master/register.php" target="_blank">register.php</a></li>
-    <li><a href="https://github.com/alger24/nsp/blob/master/php/handler.php" target="_blank">php/handler.php</a></li>
-    </ul>
-</details>
+- [![label](https://img.shields.io/badge/Registration-in--progress-red)](#)
+- [![label](https://img.shields.io/badge/User_Page_&_Functions-planning-blue)](#)
+
 
 ## Note2Self
 ☀Day 1 📅Jan-14, 2023
