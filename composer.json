@@ -1,0 +1,22 @@
+{
+    "name": "alger/nsp",
+    "description": "none",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alger Bedaña",
+            "email": "69410170+alger24@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ramsey/uuid": "^4.7",
+        "catfan/medoo": "^2.1"
+    }
+}
