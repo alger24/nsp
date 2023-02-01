@@ -1,4 +1,6 @@
 <?php
+// SWITCHING FROM THIS TO PSR-4 AUTLOAD
+
 // It auto-loads any file it finds starting with class.<classname>.php (LOWERCASE), eg: class.from.php, class.db.php
     spl_autoload_register(function($class_name) {
 
