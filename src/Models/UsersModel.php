@@ -1,16 +1,15 @@
-<?php
+<?php namespace App\Models;
 
-namespace app\model\UsersCRUD;
+use App\Models\ConnectDB;
+use PDOException;
 
-use app\model\ConnectionDB\ConnectionDB;
 
-class UsersCrud extends ConnectionDB
+class UsersModel extends ConnectDB
 {
     /* 
         Properties 
     */
-    protected string $user_uid;
-    protected string $extr_uid;
+    public string $user_uid;
     protected $sql;
     protected $conn;
 
@@ -18,110 +17,65 @@ class UsersCrud extends ConnectionDB
         Constructor
     */
     public function __construct() {
-        $db = ConnectionDB::getInstance();
+        $db = ConnectDB::getInstance();
         $this->conn = $db->getConnection();
     }
 
-    /*
-        Destruct
-    */
     public function __destruct() {
         $this->sql = null;
-        $this->conn = null;
     }
 
-
-    /* 
-        Getter & Setter
-    */
-
-    protected function getUID() {
-        return $user_uid = $this->user_uid;
-    }
-
-    protected function setUID($setuser_uid) {
-        $this->user_uid = $setuser_uid;
-    }
-
-
+    
     /* 
         Main Methods 
     */
 
-
-    protected function sInsert($tblname, $data) {
-        try {
-            
-
-        } catch(PDOException $e) {
-            $this->conn->rollBack();
-            echo "Fatal Error: " . $e->getMessage();
-        }
-    }
-
-    // Create
-    protected function multiInsert($tblname, array $data) {
+    protected function cstmQuery($query) {
         try {
             $this->conn->beginTransaction();
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
 
-            // create(Legacy)
-            if($data && $tblname) {
-
-                /* Creating an array of keys and values. */
-                foreach ($data as $key => $value)
-                {
-                    $fields[] = $key;
-                    $values[] = ":{$key}";
-                }
-
-                if($this->user_uid) {
-                    array_push($fields, 'user_uid');
-                    array_push($values, ':user_uid');
-                }
-
-                $sql = "INSERT INTO $tblname (";
-                $sql .= implode(", ", $fields) . ") VALUES (";
-                $sql .= implode(", ", $values) . ")";
-
-                $stmt = $this->conn->prepare($sql);
-
-                $this->user_uid ? $stmt->bindValue(":user_uid", $this->user_uid) : null;
-                
-                /* It's binding the values to the keys. */
-                foreach ($data as $key => $value)
-                {
-                    $stmt->bindValue(':' . $key, $value);
-                }
-
-                $stmt->execute();
+        } catch(PDOException $event) {
+            $this->conn->rollBack();
+            echo "Fatal Error: " . $event->getMessage();
+        }
+    }
+    // Insert a new data column to an existing table
+    protected function postInsert($tblname, $data) {
+        try {
+            $this->conn->beginTransaction();
+            // NOTE: Replace the throw to return later
+            if(!isset($tblname) || !isset($data)) throw new Exception("Error", 01);
+            /* Creating an array of keys and values. */
+            foreach ($data as $key => $value)
+            {
+                $fields[] = $key;
+                $values[] = ":{$key}";
             }
-            
-            /*
-            // If there are two ID's inserted
-            // NOTE GET THIS OUT OF HERE TO USER CONTROL!!!
-            if($id2name) {
-                array_push($fields, $id2name);
-                $sql .= ":{$id2name}";
-                $stmt->bindValue(":{$id2name}", bin2hex(random_bytes(24)));
+            /* It's adding the user_uid to the fields and values array. */
+            if($this->user_uid) {
+                array_push($fields, 'user_uid');
+                array_push($values, ':user_uid');
             }
-            // Create only w/ id
-            if(!$data && is_array($tblname)) {
-                foreach($tblname as $table)
-                {
-                    $sql = "INSERT INTO $table (user_uid) VALUE ?";
-                    $stmt = $this->conn->prepare($sql);
-                    $stmt->execute($this->user_uid);
-                }
-            } 
-            */
-
+            /* Creating a SQL statement. */
+            $sql = "INSERT INTO $tblname (";
+            $sql .= implode(", ", $fields) . ") VALUES (";
+            $sql .= implode(", ", $values) . ")";
+            $stmt = $this->conn->prepare($sql);
+            /* It's binding the values to the prepared statement. */
+            foreach ($data as $key => $value)
+            {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            $this->user_uid ? $stmt->bindValue(":user_uid", $this->user_uid) : null;
+            $stmt->execute();
             $this->conn->commit();
         } 
         catch(PDOException $e) {
             $this->conn->rollBack();
             echo "Fatal Error: " . $e->getMessage();
         }
-
         return;
     }
 

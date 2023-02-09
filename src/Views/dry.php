@@ -11,23 +11,23 @@ return <<<HTML
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>$title</title>
-<link rel="stylesheet" href="./css/temp-style.css">
+<link rel="stylesheet" href="css/temp-style.css">
 </head>
 <body>
-<div class="container">
+<div class="app">
 HTML;
 }
 
 function __footerindex() {
 return <<<HTML
 </div>
-<script src="js/index.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
 HTML;
 }
 
-// Nav outside php folder
+// Nav outside php folder NOTE: Edit later
 function __headernav() {
 return <<<HTML
 <nav>
