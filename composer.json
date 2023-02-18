@@ -6,8 +6,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/"
-        },
-        "files": ["views/dry.php"]
+        }
     },
     "authors": [
         {
