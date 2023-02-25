@@ -1,21 +1,26 @@
 <?php namespace App\Control;
 
+use App\Model\UserModel;
+
 require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
 
-use App\MedooConnect;
-use Ramsey\Uuid\Uuid;
+class UserControl extends UserModel {
+    public function registerUserControl(array $postData) {
+        $database = $this->MedooDB;
 
-class UserControl extends MedooConnect {
-    // Properties
-    
+        // guard check if email exist
+        if($database->has('user_personal_information', ['user_email' => $postData['user_email']])) return "Email incorrect or already exist.";
+        
+        
+        unset($postData['signUpBtn']);
 
-    // Methods
+        // insert user_uuid => $new_uuid to beginning of newArray later
+        $new_uuid = Ramsey\Uuid\Uuid::uuid4()->toString();
+        $postData['user_uuid'] = $new_uuid;
 
-    // Generates a universally unique identifier for user id using ramsey/uuid
-    private function generateUID()
-    {
-        $uuid = Uuid::uuid4();
-        return $uuid->toString();
+        return $postData;
+
+        // if all steps above are satisfied run the actual insert
+        $this->registerUserModel($postData);
     }
-
 }
