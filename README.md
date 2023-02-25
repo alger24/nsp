@@ -7,9 +7,9 @@ https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 Hello! "underconstruction"
 
 
-## Status Board
-[![label](https://img.shields.io/badge/Registration-69%-darkorange)](#)
-[![label](https://img.shields.io/badge/User_Page-20%-red)](#)
+## Progress Board
+![Progress](https://img.shields.io/badge/Registration-69%25-darkorange)
+![Progress](https://img.shields.io/badge/User_Page-20%25-darkred)
 [![label](https://img.shields.io/badge/Admin_Page-planning-blue)](#)
 [![label](https://img.shields.io/badge/Routing-planning-blue)](#)
 [![label](https://img.shields.io/badge/Designing-n/a-lightgray)](#)
